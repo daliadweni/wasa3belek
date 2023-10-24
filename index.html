@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smiling Face with Looping Audio</title>
+    <title>wasa3 belek</title>
     <style>
         body {
-            background-color: #2e3d49; /* Set your desired background color */
+            background-color: #2e3d49;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -15,8 +15,14 @@
         }
 
         #smile {
-            font-size: 90px;
+            font-size: 60px;
             color: #ffcc00;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
     </style>
 </head>

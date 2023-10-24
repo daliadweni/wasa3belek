@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Play Audio with Replay Button</title>
+    <title>Auto Start Audio with Replay Button</title>
     <style>
         body {
             background-color: #2e3d49;
@@ -23,7 +23,7 @@
 </head>
 <body>
     <div id="smile">😄</div>
-    <button id="playButton">Play</button>
+    <button id="playButton"></button>
     <audio id="audio" loop>
         <source src="https://daliadweni.github.io/wasa3belek/audio.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
@@ -33,14 +33,22 @@
         const playButton = document.getElementById('playButton');
         const audio = document.getElementById('audio');
 
-        playButton.addEventListener('click', () => {
+        const autoStartAudio = () => {
             audio.play();
+            playButton.style.display = 'none';
+        };
+
+        playButton.addEventListener('click', () => {
+            audio.currentTime = 0;
+            autoStartAudio();
         });
 
         audio.addEventListener('ended', () => {
-            // When the audio ends, you can replay it by clicking the play button.
             playButton.style.display = 'block';
         });
+
+        // Start the audio automatically when the page loads.
+        autoStartAudio();
     </script>
 </body>
 </html>

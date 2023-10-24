@@ -3,35 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>wasa3 belek</title>
+    <title>Play Audio with Replay Button</title>
     <style>
         body {
             background-color: #2e3d49;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
+            justify-content: center;
             height: 100vh;
             margin: 0;
         }
 
         #smile {
-            font-size: 90px;
+            font-size: 60px;
             color: #ffcc00;
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
         }
     </style>
 </head>
 <body>
     <div id="smile">😄</div>
-    <audio autoplay loop>
-   <source src="https://daliadweni.github.io/wasa3belek/audio.mp3" type="audio/mpeg">
-   Your browser does not support the audio element.
-</audio>
+    <button id="playButton">Play</button>
+    <audio id="audio" loop>
+        <source src="https://daliadweni.github.io/wasa3belek/audio.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
 
+    <script>
+        const playButton = document.getElementById('playButton');
+        const audio = document.getElementById('audio');
+
+        playButton.addEventListener('click', () => {
+            audio.play();
+        });
+
+        audio.addEventListener('ended', () => {
+            // When the audio ends, you can replay it by clicking the play button.
+            playButton.style.display = 'block';
+        });
+    </script>
 </body>
 </html>

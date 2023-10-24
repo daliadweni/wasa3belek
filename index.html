@@ -30,25 +30,41 @@
     </audio>
 
     <script>
-        const playButton = document.getElementById('playButton');
-        const audio = document.getElementById('audio');
+       const playButton = document.getElementById('playButton');
+const audio = document.getElementById('audio');
 
-        const autoStartAudio = () => {
-            audio.play();
-            playButton.style.display = 'none';
-        };
+// Function to start audio playback and enable looping
+const autoStartAndLoopAudio = () => {
+    audio.addEventListener('canplay', () => {
+        // When audio is ready to play, start and loop it
+        audio.play();
+        audio.loop = true;
+        playButton.style.display = 'none';
+    });
 
-        playButton.addEventListener('click', () => {
-            audio.currentTime = 0;
-            autoStartAudio();
-        });
+    // Handle the 'ended' event to reset the audio when it finishes
+    audio.addEventListener('ended', () => {
+        audio.currentTime = 0;
+        audio.play();
+    });
 
-        audio.addEventListener('ended', () => {
+    // Handle cases where autoplay might be blocked
+    audio.addEventListener('play', () => {
+        if (audio.paused) {
+            // Autoplay was blocked, so show the play button
             playButton.style.display = 'block';
-        });
+        }
+    });
+};
 
-        // Start the audio automatically when the page loads.
-        autoStartAudio();
+playButton.addEventListener('click', () => {
+    audio.currentTime = 0;
+    autoStartAndLoopAudio();
+});
+
+// Start the audio playback automatically when the page loads
+autoStartAndLoopAudio();
+
     </script>
 </body>
 </html>

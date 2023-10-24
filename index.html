@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Auto Start Audio with Replay Button</title>
+    <title>Auto Start and Replay Audio</title>
     <style>
         body {
             background-color: #2e3d49;
@@ -23,48 +23,23 @@
 </head>
 <body>
     <div id="smile">😄</div>
-    <button id="playButton"></button>
-    <audio id="audio" muted>
+    <audio id="audio">
         <source src="https://daliadweni.github.io/wasa3belek/audio.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
 
     <script>
-       const playButton = document.getElementById('playButton');
-const audio = document.getElementById('audio');
+        const audio = document.getElementById('audio');
 
-// Function to start audio playback and enable looping
-const autoStartAndLoopAudio = () => {
-    audio.addEventListener('canplay', () => {
-        // When audio is ready to play, start and loop it
-        audio.play();
-        audio.loop = true;
-        playButton.style.display = 'none';
-    });
+        audio.addEventListener('canplay', () => {
+            audio.play();
+            audio.loop = true;
+        });
 
-    // Handle the 'ended' event to reset the audio when it finishes
-    audio.addEventListener('ended', () => {
-        audio.currentTime = 0;
-        audio.play();
-    });
-
-    // Handle cases where autoplay might be blocked
-    audio.addEventListener('play', () => {
-        if (audio.paused) {
-            // Autoplay was blocked, so show the play button
-            playButton.style.display = 'block';
-        }
-    });
-};
-
-playButton.addEventListener('click', () => {
-    audio.currentTime = 0;
-    autoStartAndLoopAudio();
-});
-
-// Start the audio playback automatically when the page loads
-autoStartAndLoopAudio();
-
+        audio.addEventListener('ended', () => {
+            audio.currentTime = 0;
+            audio.play();
+        });
     </script>
 </body>
 </html>
